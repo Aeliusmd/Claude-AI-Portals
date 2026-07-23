@@ -31,7 +31,7 @@ export function Pagination({
   onChange,
   className,
 }) {
-  if (total <= PAGE_SIZE) return null;
+  if (totalPages <= 1) return null;
 
   return (
     <div

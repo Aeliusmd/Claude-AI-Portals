@@ -91,14 +91,23 @@ export const visits = [
     location: "Downtown Clinic",
     date: "Jun 15, 2026",
     status: "Completed",
-    workStatus: "Full duty",
+    workStatus: "N/A",
     restrictions: "None",
-    followUp: "None",
-    specialInstructions: "Seasonal flu vaccination administered without incident.",
+    followUp: "Flu shot next season",
+    specialInstructions:
+      "Routine annual physical examination completed. All vitals within normal range. Blood work ordered — CBC, lipid panel, and metabolic panel. Patient advised to maintain current exercise routine of 150 minutes moderate activity per week. Discussed age-appropriate cancer screenings. Flu shot administered. No acute concerns identified.",
     documents: [
       {
-        title: "Vaccination Record",
-        type: "Immunization",
+        id: "doc-imm-001",
+        title: "Immunization Record Update",
+        type: "Immunization Record",
+        date: "Jun 15, 2026",
+        recordKey: "immunization",
+      },
+      {
+        id: "doc-clear-001",
+        title: "Pre-Employment Clearance Form",
+        type: "Clearance Form",
         date: "Jun 15, 2026",
       },
     ],
@@ -278,7 +287,6 @@ export const visits = [
 ];
 
 export const visitCategories = [
-  "All",
   "Urgent Care",
   "Personal Injury",
   "Injury",

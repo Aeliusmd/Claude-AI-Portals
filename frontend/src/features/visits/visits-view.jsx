@@ -10,13 +10,13 @@ import {
 } from "@/components/ui/pagination";
 import { Tabs } from "@/components/ui/tabs";
 import { visitCategories, visits } from "@/data/visits";
-import { VisitCard, VisitDetailPanel } from "@/features/visits/visit-card";
+import { VisitCard } from "@/features/visits/visit-card";
+import { VisitDetailPanel } from "@/features/visits/visit-detail-panel";
+import { VisitDocumentPanel } from "@/features/visits/visit-document-panel";
+
+const VISITS_PAGE_SIZE = 5;
 
 const categoryTabStyles = {
-  All: {
-    activeClass: "bg-primary text-white",
-    idleClass: "bg-cream-deep text-ink",
-  },
   "Urgent Care": {
     activeClass: "bg-amber-500 text-white",
     idleClass: "bg-amber-100 text-amber-800",
@@ -30,31 +30,43 @@ const categoryTabStyles = {
     idleClass: "bg-orange-100 text-orange-800",
   },
   Physical: {
-    activeClass: "bg-emerald-500 text-white",
+    activeClass: "bg-emerald-600 text-white",
     idleClass: "bg-emerald-100 text-emerald-800",
   },
 };
 
 export function VisitsView() {
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState(visitCategories[0]);
   const [selectedId, setSelectedId] = useState(null);
+  const [showDocument, setShowDocument] = useState(false);
   const [page, setPage] = useState(1);
 
-  const filtered = useMemo(() => {
-    if (category === "All") return visits;
-    return visits.filter((visit) => visit.category === category);
-  }, [category]);
+  const filtered = useMemo(
+    () => visits.filter((visit) => visit.category === category),
+    [category]
+  );
 
   useEffect(() => {
     setPage(1);
     setSelectedId(null);
+    setShowDocument(false);
   }, [category]);
 
-  const paged = paginateItems(filtered, page);
+  const paged = paginateItems(filtered, page, VISITS_PAGE_SIZE);
   const selectedVisit =
     paged.items.find((visit) => visit.id === selectedId) ||
     filtered.find((visit) => visit.id === selectedId) ||
     null;
+
+  function handleSelectVisit(id) {
+    setSelectedId(id);
+    setShowDocument(false);
+  }
+
+  function handleCloseDetails() {
+    setSelectedId(null);
+    setShowDocument(false);
+  }
 
   return (
     <div>
@@ -72,7 +84,7 @@ export function VisitsView() {
         }))}
       />
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+      <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-start">
         <div>
           <div className="space-y-3">
             {paged.items.map((visit) => (
@@ -80,7 +92,7 @@ export function VisitsView() {
                 key={visit.id}
                 visit={visit}
                 selected={selectedId === visit.id}
-                onSelect={setSelectedId}
+                onSelect={handleSelectVisit}
               />
             ))}
           </div>
@@ -96,12 +108,18 @@ export function VisitsView() {
           />
         </div>
 
-        {selectedVisit ? (
-          <VisitDetailPanel visit={selectedVisit} />
-        ) : (
+        {!selectedVisit ? (
           <EmptyState
             icon={ArrowLeft}
             title="Select a visit to view details"
+          />
+        ) : showDocument ? (
+          <VisitDocumentPanel onBack={() => setShowDocument(false)} />
+        ) : (
+          <VisitDetailPanel
+            visit={selectedVisit}
+            onClose={handleCloseDetails}
+            onSelectDocument={() => setShowDocument(true)}
           />
         )}
       </div>

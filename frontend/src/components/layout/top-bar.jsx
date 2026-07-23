@@ -1,7 +1,8 @@
 "use client";
 
-import { Bell, ChevronDown, Search, UserRound } from "lucide-react";
-import { currentPatient } from "@/data/patient";
+import { Search } from "lucide-react";
+import { NotificationsMenu } from "@/components/layout/notifications-menu";
+import { ProfileMenu } from "@/components/layout/profile-menu";
 
 export function TopBar() {
   return (
@@ -20,30 +21,8 @@ export function TopBar() {
       </div>
 
       <div className="flex items-center gap-3">
-        <button
-          type="button"
-          className="relative rounded-full p-2 text-muted transition hover:bg-cream-deep hover:text-ink"
-          aria-label="Notifications"
-        >
-          <Bell className="h-5 w-5" />
-          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-rose-500" />
-        </button>
-
-        <button
-          type="button"
-          className="flex items-center gap-2 rounded-full py-1 pr-2 pl-1 transition hover:bg-cream-deep"
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-white">
-            <UserRound className="h-4 w-4" />
-          </span>
-          <span className="hidden text-left sm:block">
-            <span className="block text-sm font-semibold text-ink">
-              {currentPatient.fullName}
-            </span>
-            <span className="block text-xs text-muted">{currentPatient.role}</span>
-          </span>
-          <ChevronDown className="hidden h-4 w-4 text-muted sm:block" />
-        </button>
+        <NotificationsMenu />
+        <ProfileMenu />
       </div>
     </header>
   );

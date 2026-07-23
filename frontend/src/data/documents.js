@@ -1,15 +1,19 @@
 export const newlySharedDocuments = [
   {
     id: "doc-new-1",
+    documentId: "DOC-2026-0042",
     title: "Annual Physical Report",
     date: "Jul 11, 2026",
     isNew: true,
+    url: "/sample.pdf",
   },
   {
     id: "doc-new-2",
+    documentId: "DOC-2026-0038",
     title: "Chest X-Ray Results",
     date: "Jun 29, 2026",
     isNew: true,
+    url: "/sample.pdf",
   },
 ];
 

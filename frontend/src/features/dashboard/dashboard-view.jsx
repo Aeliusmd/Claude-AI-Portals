@@ -1,11 +1,16 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { CalendarDays, Clock3, Download, Eye, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { DocumentPreviewModal } from "@/components/ui/document-preview-modal";
 import { currentPatient, dashboardSummary } from "@/data/patient";
 import { newlySharedDocuments } from "@/data/documents";
 import { recentVisits } from "@/data/visits";
+import { openDocumentInNewTab } from "@/lib/documents";
 import { visitStatusStyles } from "@/lib/category-styles";
 
 function SummaryCard({ title, value, detail, icon: Icon }) {
@@ -29,6 +34,7 @@ function SummaryCard({ title, value, detail, icon: Icon }) {
 
 export function DashboardView() {
   const { upcomingAppointment, latestVisit, newDocuments } = dashboardSummary;
+  const [previewDocument, setPreviewDocument] = useState(null);
 
   return (
     <div>
@@ -138,11 +144,19 @@ export function DashboardView() {
                     </div>
                     <p className="mt-1 text-sm text-muted">{doc.date}</p>
                     <div className="mt-3 flex flex-wrap gap-2">
-                      <Button variant="outline" className="px-3 py-1.5 text-xs">
+                      <Button
+                        variant="outline"
+                        className="px-3 py-1.5 text-xs"
+                        onClick={() => setPreviewDocument(doc)}
+                      >
                         <Eye className="h-3.5 w-3.5" />
                         Preview
                       </Button>
-                      <Button variant="outline" className="px-3 py-1.5 text-xs">
+                      <Button
+                        variant="outline"
+                        className="px-3 py-1.5 text-xs"
+                        onClick={() => openDocumentInNewTab(doc.url)}
+                      >
                         <Download className="h-3.5 w-3.5" />
                         Download
                       </Button>
@@ -154,6 +168,13 @@ export function DashboardView() {
           </div>
         </Card>
       </div>
+
+      {previewDocument ? (
+        <DocumentPreviewModal
+          file={previewDocument}
+          onClose={() => setPreviewDocument(null)}
+        />
+      ) : null}
     </div>
   );
 }
