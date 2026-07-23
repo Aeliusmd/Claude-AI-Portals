@@ -33,7 +33,7 @@ export function DocumentPreviewModal({ file, onClose }) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:pl-[calc(16rem+1.5rem)]"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 lg:pl-[calc(16rem+1.5rem)]"
       role="dialog"
       aria-modal="true"
       aria-label={`Preview ${file.title}`}
@@ -41,11 +41,11 @@ export function DocumentPreviewModal({ file, onClose }) {
       <button
         type="button"
         aria-label="Close preview backdrop"
-        className="absolute inset-0 bg-black/45 md:left-64"
+        className="absolute inset-0 bg-black/45 lg:left-64"
         onClick={onClose}
       />
 
-      <div className="relative z-10 flex h-[min(88dvh,54rem)] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-[0_24px_80px_rgba(15,23,42,0.28)]">
+      <div className="relative z-10 flex h-[min(90dvh,54rem)] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-[0_24px_80px_rgba(15,23,42,0.28)]">
         <div className="flex shrink-0 items-center justify-between gap-4 border-b border-[#ece7df] px-5 py-4">
           <div className="flex min-w-0 items-center gap-3">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#e8f1fb] text-primary">

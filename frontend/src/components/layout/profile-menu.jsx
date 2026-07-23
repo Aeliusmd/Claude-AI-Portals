@@ -42,14 +42,14 @@ export function ProfileMenu() {
         <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-white">
           <UserRound className="h-4 w-4" />
         </span>
-        <span className="hidden text-left sm:block">
+        <span className="hidden text-left lg:block">
           <span className="block text-sm font-semibold text-ink">
             {currentPatient.fullName}
           </span>
           <span className="block text-xs text-muted">{currentPatient.role}</span>
         </span>
         <ChevronDown
-          className={`hidden h-4 w-4 text-muted transition sm:block ${
+          className={`hidden h-4 w-4 text-muted transition lg:block ${
             open ? "rotate-180" : ""
           }`}
         />

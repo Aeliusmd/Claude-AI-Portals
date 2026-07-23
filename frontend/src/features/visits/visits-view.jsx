@@ -109,10 +109,12 @@ export function VisitsView() {
         </div>
 
         {!selectedVisit ? (
-          <EmptyState
-            icon={ArrowLeft}
-            title="Select a visit to view details"
-          />
+          <div className="hidden lg:block">
+            <EmptyState
+              icon={ArrowLeft}
+              title="Select a visit to view details"
+            />
+          </div>
         ) : showDocument ? (
           <VisitDocumentPanel onBack={() => setShowDocument(false)} />
         ) : (

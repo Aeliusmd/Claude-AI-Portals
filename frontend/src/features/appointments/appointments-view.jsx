@@ -51,7 +51,7 @@ export function AppointmentsView() {
 
       <Card className="overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="min-w-full text-left text-sm">
+      <table className="min-w-[48rem] w-full text-left text-sm">
             <thead className="border-b border-border/80 bg-cream/40 text-[11px] font-semibold tracking-[0.08em] text-muted uppercase">
               <tr>
                 <th className="px-5 py-3">Doctor</th>

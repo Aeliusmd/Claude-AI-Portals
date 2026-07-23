@@ -76,8 +76,8 @@ export function RecentShareCard({ share, selected, onSelect }) {
       className={cn(
         "flex w-full cursor-pointer items-start gap-3 rounded-xl border bg-white p-4 text-left transition",
         selected
-          ? "border-primary shadow-[0_0_0_1px_rgba(31,111,235,0.2)]"
-          : "border-border/70 hover:border-primary/40"
+          ? "border-primary bg-[#f3eee4] shadow-[0_0_0_1px_rgba(31,111,235,0.2)]"
+          : "border-border/70 bg-[#faf7f1] hover:border-primary/40"
       )}
     >
       <RecipientIcon role={share.sharedWithRole} />
@@ -105,7 +105,7 @@ export function ShareDetailPanel({ share, onClose, onViewDocument }) {
   if (!share) return null;
 
   return (
-    <Card className="p-5">
+    <Card className="w-full p-4 sm:p-5">
       <div className="flex items-start justify-between gap-3">
         <h2 className="text-lg font-semibold text-ink">Share Details</h2>
         {onClose ? (
@@ -140,19 +140,25 @@ export function ShareDetailPanel({ share, onClose, onViewDocument }) {
           </p>
           <div className="mt-1.5 flex items-center gap-2.5">
             <RecipientIcon role={share.sharedWithRole} size="sm" />
-            <div>
-              <p className="text-sm font-semibold text-ink">{share.sharedWith}</p>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-ink">
+                {share.sharedWith}
+              </p>
               <p className="text-xs text-muted">{share.sharedWithRole}</p>
             </div>
           </div>
         </div>
-        <Detail label="Shared Date" value={share.sharedDate} />
-        <div>
-          <p className="text-[11px] font-semibold tracking-[0.08em] text-muted uppercase">
-            Status
-          </p>
-          <div className="mt-1.5">
-            <Badge className="bg-emerald-100 text-emerald-800">{share.status}</Badge>
+        <div className="grid grid-cols-2 gap-4">
+          <Detail label="Shared Date" value={share.sharedDate} />
+          <div>
+            <p className="text-[11px] font-semibold tracking-[0.08em] text-muted uppercase">
+              Status
+            </p>
+            <div className="mt-1.5">
+              <Badge className="bg-emerald-100 text-emerald-800">
+                {share.status}
+              </Badge>
+            </div>
           </div>
         </div>
       </div>
@@ -162,7 +168,7 @@ export function ShareDetailPanel({ share, onClose, onViewDocument }) {
           Check-in & Visit
         </p>
 
-        <div className="mt-3 grid gap-4 sm:grid-cols-2">
+        <div className="mt-3 grid grid-cols-2 gap-4">
           <Detail label="Visit ID" value={share.visitId} />
           <div>
             <p className="text-[11px] font-semibold tracking-[0.08em] text-muted uppercase">
@@ -176,7 +182,7 @@ export function ShareDetailPanel({ share, onClose, onViewDocument }) {
           </div>
           <Detail label="Check-in" value={share.checkIn} />
           <Detail label="Provider" value={share.provider} />
-          <div className="sm:col-span-2">
+          <div className="col-span-2">
             <Detail label="Location" value={share.location} />
           </div>
         </div>
